@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  etl:
+    image: harbor.esfurn.org/etl/esfurn_etl:image_tag
+    volumes:
+      - "./log:/log"
+      - "data_folder:/data"
+    networks:
+      - feder8-net
+    environment:
+      DB_DBMS: "postgresql"
+      DB_SERVER : "postgres"
+      DB_PORT: "5432"
+      DB_DBNAME: "OHDSI"
+      DB_SCHEMA: "omopcdm"
+      DB_USER: db_username
+      DB_PASSWORD: db_password
+      VERBOSITY_LEVEL: verbosity_level
+      INPUT_DATA: input_filename
+      DIAGNOSIS_CODE_MAPPING: diagnosis_filename
+      DRUG_CODE_MAPPING: drug_filename
+      SITE_COLLECTION_MAPPING: tissue_filename
+      INSIDE_DOCKER: "True"
+
+networks:
+  feder8-net:
+      name: feder8-net
+      external: true
