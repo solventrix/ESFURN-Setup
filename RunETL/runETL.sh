@@ -14,6 +14,8 @@ read -p "Output verbosity level [INFO]: " verbosity_level
 verbosity_level=${verbosity_level:-INFO}
 read -p "Docker Hub image tag [current]: " image_tag
 image_tag=${image_tag:-current}
+read -p "Date of last export yyyy-mm-dd [\"2021-06-01\"]: " date_last_export
+date_last_export=${date_last_export:-\"2021-06-01\"}
 
 read -p "Input filename [ESFURN_data_collection.xlsx]: " input_filename
 input_filename=${input_filename:-ESFURN_data_collection.xlsx}
@@ -29,6 +31,7 @@ sed -i -e "s/db_username/$db_username/g" docker-compose.yml
 sed -i -e "s/db_password/$db_password/g" docker-compose.yml
 sed -i -e "s/verbosity_level/$verbosity_level/g" docker-compose.yml
 sed -i -e "s/image_tag/$image_tag/g" docker-compose.yml
+sed -i -e "s/date_last_export/$date_last_export/g" docker-compose.yml
 sed -i -e "s/input_filename/$input_filename/g" docker-compose.yml
 sed -i -e "s/diagnosis_filename/$diagnosis_filename/g" docker-compose.yml
 sed -i -e "s/drug_filename/$drug_filename/g" docker-compose.yml

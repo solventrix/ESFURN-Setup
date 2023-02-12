@@ -22,6 +22,7 @@ services:
       DRUG_CODE_MAPPING: drug_filename
       SITE_COLLECTION_MAPPING: tissue_filename
       INSIDE_DOCKER: "True"
+      LAST_DATA_EXPORT: date_last_export
 
 networks:
   feder8-net:
