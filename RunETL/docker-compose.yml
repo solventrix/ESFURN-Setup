@@ -23,6 +23,7 @@ services:
       SITE_COLLECTION_MAPPING: tissue_filename
       INSIDE_DOCKER: "True"
       LAST_DATA_EXPORT: date_last_export
+      ESFURN_SITE: "ESFURN"
 
 networks:
   feder8-net:
