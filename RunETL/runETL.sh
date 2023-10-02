@@ -25,6 +25,8 @@ read -p "Drug lookup filename [drug_codes.csv]: " drug_filename
 drug_filename=${drug_filename:-drug_codes.csv}
 read -p "Tissue lookup filename [tissue_codes.csv]: " tissue_filename
 tissue_filename=${tissue_filename:-tissue_codes.csv}
+read -p "Other therapies lookup filename [muc_therapy_other_therapies.csv]: " other_therapies_filename
+other_therapies_filename=${other_therapies_filename:-muc_therapy_other_therapies.csv}
 
 sed -i -e "s@data_folder@$data_folder@g" docker-compose.yml
 sed -i -e "s/db_username/$db_username/g" docker-compose.yml
@@ -36,6 +38,7 @@ sed -i -e "s/input_filename/$input_filename/g" docker-compose.yml
 sed -i -e "s/diagnosis_filename/$diagnosis_filename/g" docker-compose.yml
 sed -i -e "s/drug_filename/$drug_filename/g" docker-compose.yml
 sed -i -e "s/tissue_filename/$tissue_filename/g" docker-compose.yml
+sed -i -e "s/other_therapies_filename/$other_therapies_filename/g" docker-compose.yml
 
 docker login harbor.esfurn.org
 docker compose pull
