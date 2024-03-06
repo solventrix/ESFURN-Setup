@@ -25,6 +25,7 @@
     * the name of the diagnosis code mapping file
     * the name of the drug code mapping file
     * the name of the site collection mapping file
+    * the name of the mapping file for *Other* mUC therapies
 6. The script will run the ETL code and show the output of the code
 7. The `etl_<datetime>.log` log file will be available in the `log` folder
 8. Review the log file to verify that there is no patient-level information.
