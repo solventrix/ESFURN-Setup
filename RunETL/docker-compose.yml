@@ -24,7 +24,7 @@ services:
       OTHER_THERAPIES_MAPPING: other_therapies_filename
       INSIDE_DOCKER: "True"
       LAST_DATA_EXPORT: date_last_export
-      ESFURN_SITE: "ESFURN"
+      ESFURN_SITE: esfurn_site
 
 networks:
   feder8-net:
