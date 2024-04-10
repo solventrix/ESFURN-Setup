@@ -13,10 +13,13 @@
    * `mkdir etl_run`
    * `cd etl_run`
 3. Download the installation script:
-    * `curl -L https://raw.githubusercontent.com/solventrix/Esfurn-setup/master/RunETL/runETL.sh --output runETL.sh && chmod +x runETL.sh`
-4. Execute the `runETL.sh` script by running `./runETL.sh` from inside the directory where the script is located. It is possible that you will need to use the `sudo` command: `sudo ./runETL.sh`.
+   * For Linux / MacOS:
+     - `curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.sh --output runETL.sh && chmod +x runETL.sh`
+   * For Windows:
+     - `curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.cmd --output runETL.cmd`
+4. Execute the script by running `./runETL.sh` (Linux/MacOS) or `runETL.cmd` (Windows) from inside the directory where the script is located. It is possible that you will need to use the `sudo` command in Linux: `sudo ./runETL.sh`.
 5. The script will request for:
-    * the path to the folder that contains the input CSV data file
+    * the path to the folder that contains the input data files
       * *this folder is expected to contain the data file (Excel), the csv lookup files (for diagnosis codes, drugs, and site collections/tissues), and a subdirectory **xml_input_files** that contains any xml files from the instrument*
     * the username and password to connect to the OMOP CDM database (a running Docker container named `postgres`)
     * the verbosity level [DEBUG, INFO, WARNING, ERROR]
@@ -29,4 +32,3 @@
 6. The script will run the ETL code and show the output of the code
 7. The `etl_<datetime>.log` log file will be available in the `log` folder
 8. Review the log file to verify that there is no patient-level information.
-
