@@ -7,12 +7,12 @@
 ## Execution steps
 1. Open a terminal window
 2. Download the 'Data Quality Pipeline' run script:
-    * Linux:
+    * Linux/MacOS:
       ```curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/DataQualityPipeline/run-data-quality-pipeline.sh --output run-data-quality-pipeline.sh  && chmod +x run-data-quality-pipeline.sh```
     * Windows:
       ```curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/DataQualityPipeline/run-data-quality-pipeline.cmd --output run-data-quality-pipeline.cmd```
 3. Execute the script (from the directory where the script is downloaded)
-    * Linux:
+    * Linux/MacOS:
       ```./run-data-quality-pipeline.sh```
     * Windows:
       ```run-data-quality-pipeline.cmd```
