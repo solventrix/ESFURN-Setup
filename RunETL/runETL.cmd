@@ -1,66 +1,71 @@
 @echo off
 
-curl -L https://raw.githubusercontent.com/solventrix/ESFURN-setup/master/RunETL/docker-compose.yml --output docker-compose.yml
+::#############
+::## RUN ETL ##
+::#############
+SET REGISTRY_ETL_RUNNER=harbor.honeur.org
+SET REPOSITORY_ETL_RUNNER=library
+SET IMAGE_ETL_RUNNER=etl-runner
+SET VERSION_ETL_RUNNER=1.1.4
+SET TAG_ETL_RUNNER=%VERSION_ETL_RUNNER%
 
-set "data_folder=./data"
-set /p "data_folder=Input Data folder [%data_folder%]: "
+set LOG_FOLDER_HOST=%PWD%/log
+set DATA_FOLDER_HOST=%PWD%/data
+set QA_FOLDER_HOST=%PWD%/qa
 
-set "db_username=feder8_admin"
-set /p "db_username=DB username [%db_username%]: "
+echo "Pull ETL runner image"
 
-set "db_password="
-set /p "db_password=DB password: "
+docker pull %REGISTRY_ETL_RUNNER%/%REPOSITORY_ETL_RUNNER%/%IMAGE_ETL_RUNNER%:%TAG_ETL_RUNNER%
 
-set "verbosity_level=INFO"
-set /p "verbosity_level=Output verbosity level [%verbosity_level%]: "
+SET REGISTRY=harbor.esfurn.org
+SET REPOSITORY=etl
+SET CDM_SCHEMA=omopcdm
+SET VOCAB_SCHEMA=%CDM_SCHEMA%
 
-set "image_tag=current"
-set /p "image_tag=Docker Hub image tag [%image_tag%]: "
+echo "Download ETL questions"
+curl -fsSL https://raw.githubusercontent.com/solventrix/ESFURN-Setup/blob/master/RunETL/questions.json --output questions.json
 
-:extraction_date
-set "date_last_export="
-set /p "date_last_export=Date of last export yyyy-mm-dd: "
-IF [%date_last_export%]==[] (
-	echo Please enter the date of the source data export!
-	Timeout /T 2 /NoBreak>nul
-	goto extraction_date
-) ELSE (
-	goto next_step
-)
+:: Create the env file 
+:: etl image
+echo THERAPEUTIC_AREA=esfurn > etl-runner.env
+echo REGISTRY=%REGISTRY% >> etl-runner.env
+echo ETL_IMAGE_NAME=%REPOSITORY%/esfurn_etl >> etl-runner.env
+echo ETL_IMAGE_TAG=current >> etl-runner.env
+:: logs
+echo LOG_FOLDER_HOST=%LOG_FOLDER_HOST% >> etl-runner.env
+echo LOG_FOLDER=/log >> etl-runner.env
+echo VERBOSITY_LEVEL=%VERBOSITY_LEVEL% >> etl-runner.env
+:: schemas
+echo DB_SCHEMA=%CDM_SCHEMA% >> etl-runner.env
+echo VOCAB_SCHEMA=%VOCAB_SCHEMA% >> etl-runner.env
+:: site
+echo ESFURN_SITE=%ESFURN_SITE% >> etl-runner.env
+:: source data
+echo DATA_FOLDER_HOST=%DATA_FOLDER_HOST% >> etl-runner.env
+echo DATA_FOLDER=/data >> etl-runner.env
+echo INPUT_DATA=%INPUT_DATA% >> etl-runner.env
+echo DIAGNOSIS_CODE_MAPPING=%DIAGNOSIS_CODE_MAPPING% >> etl-runner.env
+echo DRUG_CODE_MAPPING=%DRUG_CODE_MAPPING% >> etl-runner.env
+echo SITE_COLLECTION_MAPPING=%SITE_COLLECTION_MAPPING% >> etl-runner.env
+echo OTHER_THERAPIES_MAPPING=%OTHER_THERAPIES_MAPPING% >> etl-runner.env
+echo LAST_DATA_EXPORT=%LAST_DATA_EXPORT% >> etl-runner.env
+:: others
+echo INSIDE_DOCKER=True >> etl-runner.env
+:: QA and DQD
+echo QA_FOLDER_HOST=%QA_FOLDER_HOST% >> etl-runner.env
+echo QA_FOLDER_ETL=/script/etl/gladel/reports >> etl-runner.env
+echo RUN_DQD=false >> etl-runner.env
 
-:next_step
+echo "Run ETL"
+docker run \
+-it \
+--rm \
+--name etl-runner \
+--env-file etl-runner.env \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v %PWD%/questions.json:/script/questions.json \
+--network feder8-net \
+%REGISTRY_ETL_RUNNER%/%REPOSITORY_ETL_RUNNER%/%IMAGE_ETL_RUNNER%:%TAG_ETL_RUNNER%
 
-set "input_filename=ESFURN_data_collection.xlsx"
-set /p "input_filename=Input filename [%input_filename%]: "
-
-set "diagnosis_filename=diagnosis_codes.csv"
-set /p "diagnosis_filename=Diagnosis lookup filename [%diagnosis_filename%]: "
-
-set "drug_filename=drug_codes.csv"
-set /p "drug_filename=Drug lookup filename [%drug_filename%]: "
-
-set "tissue_filename=tissue_codes.csv"
-set /p "tissue_filename=Tissue lookup filename [%tissue_filename%]: "
-
-set "other_therapies_filename=muc_therapy_other_therapies.csv"
-set /p "other_therapies_filename=Other therapies lookup filename [%other_therapies_filename%]: "
-
-set "esfurn_site=ESFURN"
-set /p "esfurn_site=Name of your site or data set [%esfurn_site%]: "
-
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'data_folder', '%data_folder%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'db_username', '%db_username%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'db_password', '%db_password%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'verbosity_level', '%verbosity_level%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'image_tag', '%image_tag%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'date_last_export', '%date_last_export%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'input_filename', '%input_filename%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'diagnosis_filename', '%diagnosis_filename%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'drug_filename', '%drug_filename%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'tissue_filename', '%tissue_filename%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'other_therapies_filename', '%other_therapies_filename%' | Set-Content docker-compose.yml"
-powershell -Command "(Get-Content docker-compose.yml) -creplace 'esfurn_site', '%esfurn_site%' | Set-Content docker-compose.yml"
-
-docker login harbor.esfurn.org
-docker compose pull
-docker compose run --rm --name etl etl
+echo "End of ETL run"
+del /f /q etl-runner.env

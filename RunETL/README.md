@@ -10,8 +10,8 @@
 ## Execution steps
 1. Open a terminal window 
 2. Create a new directory for the ETL script execution, e.g.:
-   * `mkdir etl_run`
-   * `cd etl_run`
+   * `mkdir etl_gladel`
+   * `cd etl_gladel`
 3. Download the installation script:
    * For Linux / MacOS:
      - `curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.sh --output runETL.sh && chmod +x runETL.sh`

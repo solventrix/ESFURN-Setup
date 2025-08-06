@@ -1,0 +1,18 @@
+2025-08-06 15:11:12,522 - DATES_QUALITY_CHECK - INFO - ######################################################################
+2025-08-06 15:11:12,523 - DATES_QUALITY_CHECK - INFO - ######################### DATES QUALITY CHECK ########################
+2025-08-06 15:11:12,523 - DATES_QUALITY_CHECK - INFO - ######################################################################
+2025-08-06 15:11:12,523 - DATES_QUALITY_CHECK - INFO - ######## IMPORTANT: This file contains sensitive patient data ########
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO - ######################################################################
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO - EXPLANATION: The patients logged in this file have dates inconsistency.
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO - For the checks described below, we consider the date of diagnosis as the following:
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -   Date of diagnosis (Base sheet) is equal to Date_Diagnosis_UC when Date_Diagnosis_UC is filled for the specific patient
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -   Date of diagnosis (Base sheet) is equal to Date_Diagnosis_mUC when Date_Diagnosis_UC is not filled and Date_Diagnosis_mUC is filled for the specific patient
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO - The dates for the patient must follow these 7 rules: 
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -  (1) Date of diagnosis (Date_Diagnosis_UC/Date_Diagnosis_mUC, Base sheet) must be prior or equal to Therapy_Start_Date (mUC therapy sheet)
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -  (2) Therapy_Start_Date (mUC therapy sheet) must be prior or equal to Date_Best_Response (mUC therapy sheet)
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -  (3) Therapy_Start_Date (mUC therapy sheet) must be prior or equal to Date_of_Progression (mUC therapy sheet)
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -  (4) Therapy_Start_Date (mUC therapy sheet) must be prior or equal to Date_of_Next_Therapy (mUC therapy sheet)
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -  (5) Date of diagnosis (Date_Diagnosis_UC/Date_Diagnosis_mUC, Base sheet) must be prior or equal to Date_Last_Visit (Base sheet)
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO -  (6) Date of diagnosis (Date_Diagnosis_UC/Date_Diagnosis_mUC, Base sheet) must be prior or equal to Date_of_Death (Base sheet)
+2025-08-06 15:11:12,524 - DATES_QUALITY_CHECK - INFO - 
+
