@@ -25,7 +25,6 @@ echo "Download ETL questions"
 curl -fsSL https://raw.githubusercontent.com/solventrix/ESFURN-Setup/blob/master/RunETL/questions.json --output questions.json
 
 echo "Run ETL"
-docker run -it --rm --name etl-runner --env THERAPEUTIC_AREA=%THERAPEUTIC_AREA% --env ETL_IMAGE_NAME=%REPOSITORY%/esfurn_etl --env LOG_FOLDER_HOST=%LOG_FOLDER_HOST% --env LOG_FOLDER=/log --env DATA_FOLDER=/data --env INSIDE_DOCKER=True --env QA_FOLDER_HOST=%QA_FOLDER_HOST% --env QA_FOLDER_ETL=/script/etl/esfurn/reports --env RUN_DQD=false >> etl-runner.env -v /var/run/docker.sock:/var/run/docker.sock -v %CD%/questions.json:/script/questions.json --network feder8-net %REGISTRY_ETL_RUNNER%/%REPOSITORY_ETL_RUNNER%/%IMAGE_ETL_RUNNER%:%TAG_ETL_RUNNER%
+docker run -it --rm --name etl-runner --env THERAPEUTIC_AREA=%THERAPEUTIC_AREA% --env ETL_IMAGE_NAME=%REPOSITORY%/esfurn_etl --env LOG_FOLDER_HOST=%LOG_FOLDER_HOST% --env LOG_FOLDER=/log --env DATA_FOLDER=/data --env INSIDE_DOCKER=True --env QA_FOLDER_HOST=%QA_FOLDER_HOST% --env QA_FOLDER_ETL=/script/etl/esfurn/reports --env RUN_DQD=false -v /var/run/docker.sock:/var/run/docker.sock -v %CD%/questions.json:/script/questions.json --network feder8-net %REGISTRY_ETL_RUNNER%/%REPOSITORY_ETL_RUNNER%/%IMAGE_ETL_RUNNER%:%TAG_ETL_RUNNER%
 
 echo "End of ETL run"
-del /f /q etl-runner.env
