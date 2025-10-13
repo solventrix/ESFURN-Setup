@@ -4,7 +4,7 @@ set -ex
 REGISTRY=harbor.esfurn.org
 REPOSITORY=distributed-analytics
 IMAGE=data-quality-pipeline
-VERSION=1.8
+VERSION=1.10
 TAG=$VERSION
 
 echo "Docker login @ $REGISTRY"
@@ -18,7 +18,7 @@ echo "REGISTRY=$REGISTRY" >> data-quality-pipeline.env
 echo "THERAPEUTIC_AREA=esfurn" >> data-quality-pipeline.env
 echo "INDICATION=uc" >> data-quality-pipeline.env
 echo "QA_FOLDER_HOST=$QA_FOLDER_HOST" >> data-quality-pipeline.env
-echo "SCRIPT_UUID=5eeb393c-b12b-41da-801a-382d77d8ab46" >> data-quality-pipeline.env
+echo "SCRIPT_UUID=660d2280-3217-4bb3-8aab-c26da116e499" >> data-quality-pipeline.env
 
 docker run \
 --rm \
