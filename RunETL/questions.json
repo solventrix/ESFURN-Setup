@@ -1,0 +1,58 @@
+{
+  "questions": [
+    { "question": "Name of your site or data set: ",
+      "env-var": "ESFURN_SITE",
+      "allowed-values": "Birmingham,CNIO,EMC,Erlangen",
+      "default-value": "Birmingham"
+    },
+    { "question":  "ETL image tag: ",
+      "env-var":  "ETL_IMAGE_TAG",
+      "default-value": "current"
+    },
+    { "question": "Source data folder: ",
+      "env-var": "DATA_FOLDER_HOST"
+    },
+    { "question": "Source data filename: ",
+      "env-var": "INPUT_DATA",
+      "default-value": "ESFURN_data_collection.xlsx"
+    },
+    { "question": "Diagnosis lookup filename: ",
+      "env-var": "DIAGNOSIS_CODE_MAPPING",
+      "default-value": "diagnosis_codes.csv"
+    },
+    { "question": "Drug lookup filename: ",
+      "env-var": "DRUG_CODE_MAPPING",
+      "default-value": "drug_codes.csv"
+    },
+    { "question": "Tissue lookup filename: ",
+      "env-var": "SITE_COLLECTION_MAPPING",
+      "default-value": "tissue_codes.csv"
+    },
+    { "question": "Other therapies lookup filename: ",
+      "env-var": "OTHER_THERAPIES_MAPPING",
+      "default-value": "muc_therapy_other_therapies.csv"
+    },
+    { "question": "Clinical tables schema: ",
+      "env-var": "DB_SCHEMA",
+      "default-value": "omopcdm"
+    },
+    { "question": "Vocabulary schema: ",
+      "env-var": "VOCAB_SCHEMA",
+      "default-value": "omopcdm"
+    },
+    {
+      "question": "Date of last export (yyyy-mm-dd): ",
+      "env-var": "LAST_DATA_EXPORT",
+      "validation": {
+        "date-format": "%Y-%m-%d",
+        "date-after": "2020-01-01",
+        "date-before": "now"
+      }
+    },
+    { "question": "Log verbosity level: ",
+      "env-var": "VERBOSITY_LEVEL",
+      "allowed-values": "INFO,DEBUG",
+      "default-value": "INFO"
+    }
+  ]
+}
