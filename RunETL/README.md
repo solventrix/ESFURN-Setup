@@ -12,11 +12,15 @@
 2. Create a new directory for the ETL script execution, e.g.:
    * `mkdir etl_esfurn`
    * `cd etl_esfurn`
-3. Download the installation script:
+3. Download the run script:
    * For Linux / MacOS:
-     - `curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.sh --output runETL.sh && chmod +x runETL.sh`
+     ```
+     curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.sh --output runETL.sh && chmod +x runETL.sh
+     ```
    * For Windows:
-     - `curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.cmd --output runETL.cmd`
+     ```
+     curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL.cmd --output runETL.cmd
+     ```
 4. Execute the script by running `./runETL.sh` (Linux/MacOS) or `runETL.cmd` (Windows) from inside the directory where the script is located. It is possible that you will need to use the `sudo` command in Linux: `sudo ./runETL.sh`.
 5. The script will request for:
     * the path to the folder that contains the input data files
@@ -33,3 +37,15 @@
 6. The script will run the ETL code and show the output of the code
 7. The `etl_<datetime>.log` log file will be available in the `log` folder
 8. Review the log file to verify that there is no patient-level information.
+
+### Alternative: run with docker compose (Linux / MacOS)
+
+1. Download the run script:
+   ```
+   curl -L https://raw.githubusercontent.com/solventrix/ESFURN-Setup/master/RunETL/runETL-compose.sh --output runETL-compose.sh && chmod +x runETL-compose.sh
+   ```
+2. Run script:
+   ```
+   ./runETL-compose.sh
+   ```
+   
