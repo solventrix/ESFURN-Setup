@@ -3,7 +3,7 @@
     { "question": "Name of your site or data set: ",
       "env-var": "ESFURN_SITE",
       "allowed-values": "Birmingham,CNIO,EMC,Erlangen",
-      "default-value": "Birmingham"
+      "default-value": "EMC"
     },
     { "question":  "ETL image tag: ",
       "env-var":  "ETL_IMAGE_TAG",

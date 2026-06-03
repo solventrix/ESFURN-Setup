@@ -23,7 +23,7 @@ CDM_SCHEMA=omopcdm
 VOCAB_SCHEMA=$CDM_SCHEMA
 
 echo "Download ETL questions"
-curl -fsSL https://raw.githubusercontent.com/solventrix/ESFURN-Setup/blob/master/RunETL/questions.json --output questions.json
+curl -fsSL https://raw.githubusercontent.com/solventrix/ESFURN-Setup/refs/heads/master/RunETL/questions.json --output questions.json
 
 touch etl-runner.env
 # etl image
@@ -31,6 +31,7 @@ echo "THERAPEUTIC_AREA=esfurn" >> etl-runner.env
 echo "REGISTRY=$REGISTRY" >> etl-runner.env
 echo "ETL_IMAGE_NAME=$REPOSITORY/esfurn_etl" >> etl-runner.env
 # logs
+echo "DATA_FOLDER_HOST=$DATA_FOLDER_HOST" >> etl-runner.env
 echo "LOG_FOLDER_HOST=$LOG_FOLDER_HOST" >> etl-runner.env
 echo "LOG_FOLDER=/log" >> etl-runner.env
 # source data
