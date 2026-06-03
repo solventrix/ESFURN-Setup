@@ -17,6 +17,7 @@ services:
       DB_USER: feder8_admin
       DB_PASSWORD: db_password
       VERBOSITY_LEVEL: INFO
+      ESFURN_SITE: esfurn_site
       INPUT_DATA: input_filename
       DIAGNOSIS_CODE_MAPPING: diagnosis_codes.csv
       DRUG_CODE_MAPPING: drug_codes.csv

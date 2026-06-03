@@ -8,6 +8,8 @@ fi
 echo "Download compose file"
 curl -fsSL https://raw.githubusercontent.com/solventrix/ESFURN-Setup/refs/heads/master/RunETL/docker-compose.yml --output docker-compose.yml
 
+read -p "Site [EMC]: " esfurn_site
+esfurn_site=${esfurn_site:-EMC}
 read -p "Input Data folder [./data]: " data_folder
 data_folder=${data_folder:-./data}
 read -p "Input filename [ESFURN_data_collection.xlsx]: " input_filename
@@ -17,6 +19,7 @@ date_last_export=${date_last_export:-\"2024-05-01\"}
 read -p "DB password [feder8_admin]: " db_password
 db_password=${db_password:-feder8_admin}
 
+sed -i -e "s@esfurn_site@$esfurn_site@g" docker-compose.yml
 sed -i -e "s@data_folder@$data_folder@g" docker-compose.yml
 sed -i -e "s/date_last_export/$date_last_export/g" docker-compose.yml
 sed -i -e "s/input_filename/$input_filename/g" docker-compose.yml
